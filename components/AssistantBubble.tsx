@@ -1,6 +1,7 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Logo } from "./Logo";
 import { TypingIndicator } from "./TypingIndicator";
 import { MCQCard } from "./MCQCard";
@@ -58,12 +59,12 @@ export function AssistantBubble({ message }: { message: ChatMessageType }) {
                         <>
                           <MCQCard mcq={response.data.result} />
                           {response.data.result.explanation && (
-                            <div className="rounded-2xl bg-[#F4F7FB] dark:bg-[#0B1A30] border border-[#E5EAF1] dark:border-[#1B3350] p-4">
-                              <p className="text-xs uppercase tracking-wide font-semibold text-[#3B9EFF] dark:text-[#4FC3F7] mb-2">
+                            <div className="rounded-2xl bg-[#F4F7FB] dark:bg-[#0B1A30] border border-[#E5EAF1] dark:border-[#1B3350] p-4 overflow-x-auto">
+                              <p className="text-xs uppercase tracking-wide font-semibold text-[#3B9EFF] dark:text-[#4FC3F7] mb-3">
                                 Explanation
                               </p>
-                              <div className="prose prose-sm dark:prose-invert max-w-none text-[#0A1E3F] dark:text-[#EAF2FF]">
-                                <ReactMarkdown>
+                              <div className="prose prose-sm dark:prose-invert max-w-none text-[#0A1E3F] dark:text-[#EAF2FF] prose-headings:text-[#0A1E3F] dark:prose-headings:text-[#EAF2FF] prose-strong:text-[#0A1E3F] dark:prose-strong:text-[#EAF2FF] prose-table:text-sm prose-th:border prose-th:border-[#E5EAF1] dark:prose-th:border-[#1B3350] prose-th:p-2 prose-td:border prose-td:border-[#E5EAF1] dark:prose-td:border-[#1B3350] prose-td:p-2">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                   {response.data.result.explanation}
                                 </ReactMarkdown>
                               </div>
@@ -85,7 +86,9 @@ export function AssistantBubble({ message }: { message: ChatMessageType }) {
               {response.intent === "GENERAL_CHAT" &&
                 response.data.intent === "GENERAL_CHAT" && (
                   <div className="prose prose-sm dark:prose-invert max-w-none text-[#0A1E3F] dark:text-[#EAF2FF]">
-                    <ReactMarkdown>{response.data.answer}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {response.data.answer}
+                    </ReactMarkdown>
                   </div>
                 )}
             </>

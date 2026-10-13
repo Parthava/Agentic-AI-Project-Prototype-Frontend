@@ -1,9 +1,23 @@
+// ============================================================
+// Intent types
+// ============================================================
 export type Intent =
   | "RAG_SEARCH"
   | "SPECIFIC_QA"
   | "LATEST_NEWS"
   | "GENERAL_CHAT";
 
+// ============================================================
+// Match-the-following support
+// ============================================================
+export interface MatchItem {
+  key: string;    // "a", "b", "c", "d" ya "1", "2", "3", "4"
+  value: string;  // "Rock-cut temple", "Joysagar", etc.
+}
+
+// ============================================================
+// MCQ Result — RAG_SEARCH aur SPECIFIC_QA for both
+// ============================================================
 export interface MCQResult {
   q_id: string;
   year: number;
@@ -14,9 +28,19 @@ export interface MCQResult {
   options: string[];
   similarity_score?: number;
   distance?: number;
+
+  // SPECIFIC_QA ke liye extra field
   explanation?: string;
+
+  // 🆕 Match-the-following support (comes from backend or frontend)
+  is_match?: boolean;
+  left_items?: MatchItem[];
+  right_items?: MatchItem[];
 }
 
+// ============================================================
+// News item — LATEST_NEWS
+// ============================================================
 export interface NewsItem {
   title: string;
   url: string;
@@ -27,6 +51,9 @@ export interface NewsItem {
   content?: string;
 }
 
+// ============================================================
+// Intent-specific data payloads
+// ============================================================
 export interface RagSearchData {
   intent: "RAG_SEARCH";
   search_query: string;
@@ -60,12 +87,18 @@ export type IntentData =
   | LatestNewsData
   | GeneralChatData;
 
+// ============================================================
+// API Response shape — /query endpoint ka response
+// ============================================================
 export interface QueryResponse {
   intent: Intent;
   query: string;
   data: IntentData;
 }
 
+// ============================================================
+// Chat UI types
+// ============================================================
 export type ChatRole = "user" | "assistant";
 
 export interface ChatMessageType {

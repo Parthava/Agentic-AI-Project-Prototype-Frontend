@@ -43,9 +43,7 @@ export function WelcomeState({
       </h1>
 
       <p className="mt-4 text-sm sm:text-base text-[#6B7A90] dark:text-[#8AA0BE] max-w-md leading-relaxed">
-        Your AI assistant for ideas, writing, learning, coding and more.
-        <br />
-        Turn your thoughts into something amazing.
+        Your AI assistant for ideas, writing, learning, coding and more. I am here for all competitive exams but specially designed for APSC.
       </p>
 
       <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 sm:gap-3 max-w-2xl">

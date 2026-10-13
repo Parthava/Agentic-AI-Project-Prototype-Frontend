@@ -18,9 +18,9 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Chronicle — AI Assistant for APSC",
+  title: "Chronicle",
   description:
-    "Your AI assistant for APSC exam prep — retrieve, solve, and stay updated.",
+    "Your AI assistant for APSC and other exams prep — retrieve, solve, and stay updated.",
 };
 
 export default function RootLayout({
